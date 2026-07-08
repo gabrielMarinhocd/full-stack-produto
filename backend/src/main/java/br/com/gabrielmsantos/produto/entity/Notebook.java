@@ -18,7 +18,10 @@ public class Notebook {
     @Column(nullable = false)
     private Double preco;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     @JoinColumn(name = "notebook_id")
     private List<Acessorio> acessorios;
 
