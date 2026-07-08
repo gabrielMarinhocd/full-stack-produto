@@ -138,58 +138,20 @@ public class NotebookService {
     }
 
     @Transactional
-    public Notebook atualizar(
-            Long id,
-            Notebook notebook) {
-
-        log.info(
-                "Atualizando notebook. ID: {}",
-                id
-        );
-
-        ofNullable(notebook)
-                .orElseThrow(() -> {
-                    log.warn(
-                            "Tentativa de atualizar notebook nulo."
-                    );
-
-                    return new BusinessException(
-                            "Notebook para atualização não pode ser nulo."
-                    );
-                });
-
-        Notebook notebookBanco =
-                this.buscarPorId(id);
-
-        if (notebook.getId() != null &&
-                !notebookBanco.getId()
-                        .equals(notebook.getId())) {
-
-            log.warn(
-                    "IDs divergentes na atualização. Banco: {} Enviado: {}",
-                    notebookBanco.getId(),
-                    notebook.getId()
-            );
-
-            throw new BusinessException(
-                    "Os IDs do notebook devem ser iguais."
-            );
-        }
+    public Notebook atualizar(Long id, Notebook notebook) {
+        Notebook notebookBanco = buscarPorId(id);
 
         notebookBanco.setNome(notebook.getNome());
         notebookBanco.setDescricao(notebook.getDescricao());
         notebookBanco.setPreco(notebook.getPreco());
-        notebookBanco.setAcessorios(notebook.getAcessorios());
+        notebookBanco.getAcessorios().clear();
 
-        Notebook notebookAtualizado =
-                this.notebookRepository.save(notebookBanco);
+        if (notebook.getAcessorios() != null) {
+            notebookBanco.getAcessorios()
+                    .addAll(notebook.getAcessorios());
+        }
 
-        log.info(
-                "Notebook atualizado com sucesso. ID: {}",
-                notebookAtualizado.getId()
-        );
-
-        return notebookAtualizado;
+        return notebookRepository.save(notebookBanco);
     }
 
     @Transactional

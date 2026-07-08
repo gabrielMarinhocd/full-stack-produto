@@ -145,4 +145,20 @@ public record NotebookController(NotebookService notebookService) {
 
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    @Operation(
+            summary = "Atualizar notebook",
+            description = "Atualiza um notebook existente."
+    )
+    public ResponseEntity<NotebookDto> atualizar(
+            @PathVariable Long id,
+            @RequestBody NotebookDto dto) {
+
+        return ResponseEntity.ok(
+                new NotebookDto(
+                        notebookService.atualizar(id, dto.toModel())
+                )
+        );
+    }
 }
