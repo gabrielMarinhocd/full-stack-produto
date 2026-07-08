@@ -3,6 +3,7 @@ package br.com.gabrielmsantos.produto.controller.dto;
 import br.com.gabrielmsantos.produto.entity.Acessorio;
 import br.com.gabrielmsantos.produto.entity.Notebook;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public record NotebookDto(
@@ -19,7 +20,9 @@ public record NotebookDto(
                 model.getNome(),
                 model.getDescricao(),
                 model.getPreco(),
-                model.getAcessorios()
+                model.getAcessorios() == null
+                        ? new ArrayList<>()
+                        : model.getAcessorios()
                         .stream()
                         .map(AcessorioDto::new)
                         .toList()
@@ -37,11 +40,17 @@ public record NotebookDto(
         model.setPreco(this.preco);
 
         if (this.acessorios != null) {
-            model.setAcessorios(
+
+            List<Acessorio> lista =
                     this.acessorios.stream()
                             .map(AcessorioDto::toModel)
-                            .toList()
-            );
+                            .collect(
+                                    java.util.stream.Collectors.toCollection(ArrayList::new)
+                            );
+
+            model.setAcessorios(lista);
+        } else {
+            model.setAcessorios(new ArrayList<>());
         }
 
         return model;
