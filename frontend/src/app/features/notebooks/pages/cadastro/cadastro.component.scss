@@ -3,6 +3,10 @@ mat-card {
   padding: 20px;
 }
 
+mat-card-content {
+  display: block;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -17,11 +21,25 @@ mat-form-field {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin: 20px 0;
 }
 
-.acessorio {
-  margin: 15px 0;
-  padding: 15px;
+.acessorio-form {
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.header-cadastro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }

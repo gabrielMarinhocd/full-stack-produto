@@ -10,18 +10,19 @@ import { MatChipsModule } from '@angular/material/chips';
 
 import { NotebookService } from '../../notebook.service';
 import { Notebook } from '../../models/notebook.model';
-
+import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-lista',
   standalone: true,
   imports: [
     CommonModule,
-
     MatTableModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
+    RouterOutlet, 
+    RouterLink,
   ],
   templateUrl: './lista.component.html',
   styleUrl: './lista.component.scss',

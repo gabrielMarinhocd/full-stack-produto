@@ -2,6 +2,13 @@ mat-card {
   margin: 30px;
 }
 
+.header-notebooks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 table {
   width: 100%;
 }
