@@ -1,6 +1,8 @@
 <mat-card>
   <mat-card-header class="header-cadastro">
-    <mat-card-title>Cadastro de Notebook</mat-card-title>
+    <mat-card-title>
+      {{ modoEdicao ? 'Alterar Notebook' : 'Cadastro de Notebook' }}
+    </mat-card-title>
   
     <button
       mat-icon-button

@@ -10,7 +10,8 @@ import { MatChipsModule } from '@angular/material/chips';
 
 import { NotebookService } from '../../notebook.service';
 import { Notebook } from '../../models/notebook.model';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+
 @Component({
   selector: 'app-lista',
   standalone: true,
@@ -21,7 +22,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
-    RouterOutlet, 
+    RouterOutlet,
     RouterLink,
   ],
   templateUrl: './lista.component.html',
@@ -32,7 +33,7 @@ export class ListaComponent implements OnInit {
 
   displayedColumns = ['nome', 'descricao', 'preco', 'acessorios', 'acoes'];
 
-  constructor(private service: NotebookService) {}
+  constructor(private service: NotebookService, private router: Router) {}
 
   ngOnInit(): void {
     this.carregar();
@@ -48,6 +49,15 @@ export class ListaComponent implements OnInit {
         console.error('Erro ao carregar notebooks', erro);
       },
     });
+  }
+
+  editar(id?: number) {
+    debugger
+    if (!id) {
+      return;
+    }
+
+    this.router.navigate(['/notebooks/cadastrar', id]);
   }
 
   excluir(id?: number) {

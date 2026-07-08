@@ -22,4 +22,12 @@ export const routes: Routes = [
         (m) => m.CadastroComponent
       ),
   },
+
+  {
+    path: 'notebooks/cadastrar/:id',
+    loadComponent: () =>
+      import('./features/notebooks/pages/cadastro/cadastro.component').then(
+        (m) => m.CadastroComponent
+      ),
+  },
 ];

@@ -37,6 +37,10 @@ export class NotebookService {
     return this.http.post<Notebook>(this.api, notebook);
   }
 
+  atualizar(id: number, notebook: Notebook): Observable<Notebook> {
+    return this.http.put<Notebook>(`${this.api}/${id}`, notebook);
+  }
+
   excluir(id: number): Observable<void> {
     return this.http.delete<void>(`${this.api}/${id}`);
   }
