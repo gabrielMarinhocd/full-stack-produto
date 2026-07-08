@@ -1,0 +1,27 @@
+mat-card {
+  margin: 30px;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.acessorios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 20px 0;
+}
+
+.acessorio {
+  margin: 15px 0;
+  padding: 15px;
+}
