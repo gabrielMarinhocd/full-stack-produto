@@ -1,0 +1,45 @@
+mat-card {
+  margin: 30px;
+  padding: 20px;
+}
+
+mat-card-content {
+  display: block;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.acessorios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.acessorio-form {
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.header-cadastro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
