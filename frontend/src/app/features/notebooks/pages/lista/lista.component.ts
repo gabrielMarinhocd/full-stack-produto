@@ -11,17 +11,23 @@ import { MatChipsModule } from '@angular/material/chips';
 import { NotebookService } from '../../notebook.service';
 import { Notebook } from '../../models/notebook.model';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-lista',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     MatTableModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
+    MatFormFieldModule,
+    MatInputModule,
     RouterOutlet,
     RouterLink,
   ],
@@ -30,6 +36,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 })
 export class ListaComponent implements OnInit {
   notebooks: Notebook[] = [];
+  nomeAcessorio = '';
 
   displayedColumns = ['nome', 'descricao', 'preco', 'acessorios', 'acoes'];
 
@@ -52,7 +59,7 @@ export class ListaComponent implements OnInit {
   }
 
   editar(id?: number) {
-    debugger
+    debugger;
     if (!id) {
       return;
     }
@@ -74,5 +81,29 @@ export class ListaComponent implements OnInit {
         console.error('Erro ao excluir notebook', erro);
       },
     });
+  }
+
+  pesquisar(): void {
+    const nome = this.nomeAcessorio.trim();
+
+    if (!nome) {
+      this.carregar();
+      return;
+    }
+
+    this.service.buscarPorAcessorio(nome).subscribe({
+      next: (dados) => {
+        this.notebooks = dados;
+      },
+
+      error: (erro) => {
+        console.error('Erro ao pesquisar notebooks', erro);
+      },
+    });
+  }
+
+  limparPesquisa(): void {
+    this.nomeAcessorio = '';
+    this.carregar();
   }
 }

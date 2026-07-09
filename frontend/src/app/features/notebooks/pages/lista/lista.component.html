@@ -1,16 +1,43 @@
 <mat-card>
   <mat-card-header class="header-notebooks">
-    <mat-card-title> Notebooks cadastrados </mat-card-title>
+    <mat-card-title>Notebooks cadastrados</mat-card-title>
 
-    <button mat-raised-button color="primary" routerLink="/notebooks/cadastrar">
-      Cadastrar Notebook
-    </button>
+    <div class="toolbar">
+      <mat-form-field appearance="outline" class="campo-pesquisa">
+        <mat-label>Pesquisar por acessório</mat-label>
+
+        <input
+          matInput
+          [(ngModel)]="nomeAcessorio"
+          (input)="pesquisar()"
+          placeholder="Ex.: Mouse"
+        />
+
+        <button
+          *ngIf="nomeAcessorio"
+          matSuffix
+          mat-icon-button
+          type="button"
+          (click)="limparPesquisa()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/notebooks/cadastrar"
+      >
+        <mat-icon>add</mat-icon>
+        Cadastrar Notebook
+      </button>
+    </div>
   </mat-card-header>
 
   <mat-card-content>
     <table mat-table [dataSource]="notebooks" class="mat-elevation-z8">
       <!-- Nome -->
-
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
 
@@ -19,8 +46,7 @@
         </td>
       </ng-container>
 
-      <!-- Descricao -->
-
+      <!-- Descrição -->
       <ng-container matColumnDef="descricao">
         <th mat-header-cell *matHeaderCellDef>Descrição</th>
 
@@ -29,8 +55,7 @@
         </td>
       </ng-container>
 
-      <!-- Preco -->
-
+      <!-- Preço -->
       <ng-container matColumnDef="preco">
         <th mat-header-cell *matHeaderCellDef>Preço</th>
 
@@ -39,8 +64,7 @@
         </td>
       </ng-container>
 
-      <!-- Acessorios -->
-
+      <!-- Acessórios -->
       <ng-container matColumnDef="acessorios">
         <th mat-header-cell *matHeaderCellDef>Acessórios</th>
 
@@ -53,8 +77,7 @@
         </td>
       </ng-container>
 
-      <!-- Acoes -->
-
+      <!-- Ações -->
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef>Ações</th>
 

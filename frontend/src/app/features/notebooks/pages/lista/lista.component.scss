@@ -7,11 +7,40 @@ mat-card {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 10px;
+  padding-right: 16px;
+  margin-bottom: 20px;
 }
 
-button{
-  margin-right: 30px;
+.header-notebooks mat-card-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.campo-pesquisa {
+  width: 320px;
+  margin-bottom: -22px;
+}
+
+.campo-pesquisa .mat-mdc-text-field-wrapper {
+  height: 42px !important;
+}
+
+.campo-pesquisa .mat-mdc-form-field-flex {
+  height: 42px !important;
+  align-items: center;
+}
+
+.campo-pesquisa .mat-mdc-form-field-infix {
+  min-height: 42px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
 }
 
 table {
@@ -20,4 +49,8 @@ table {
 
 mat-chip {
   margin-right: 5px;
+}
+
+button {
+  margin-right: 30px;
 }
