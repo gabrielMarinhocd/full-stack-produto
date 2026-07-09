@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class NotebookServiceTest {
-
     @Mock
     private NotebookRepository repository;
 
@@ -27,7 +26,6 @@ class NotebookServiceTest {
     private NotebookService service;
 
     private Notebook notebook;
-
 
     @BeforeEach
     void setup() {
@@ -41,83 +39,63 @@ class NotebookServiceTest {
         notebook.setAcessorios(new ArrayList<>());
     }
 
-
     @Test
     @DisplayName("Deve listar notebooks")
     void deveListarNotebooks() {
-
         when(repository.findAll())
                 .thenReturn(List.of(notebook));
 
-
         List<Notebook> resultado = service.listar();
-
 
         assertEquals(1, resultado.size());
         assertEquals(
                 "Notebook Gamer",
                 resultado.get(0).getNome()
         );
-
         verify(repository).findAll();
     }
-
 
     @Test
     @DisplayName("Deve listar notebooks com seus acessórios")
     void deveListarNotebooksComAcessorios() {
-
         when(repository.listarComAcessorios())
                 .thenReturn(List.of(notebook));
-
 
         List<Notebook> resultado =
                 service.listarComAcessorios();
 
-
         assertFalse(resultado.isEmpty());
-
         verify(repository)
                 .listarComAcessorios();
     }
 
-
     @Test
     @DisplayName("Deve buscar notebooks por nome do acessório")
     void deveBuscarNotebookPorAcessorio() {
-
         when(repository.buscarPorNomeAcessorio("mouse"))
                 .thenReturn(List.of(notebook));
-
 
         List<Notebook> resultado =
                 service.buscarPorNomeAcessorio("mouse");
 
-
         assertEquals(1, resultado.size());
-
         verify(repository)
                 .buscarPorNomeAcessorio("mouse");
     }
 
-
     @Test
     @DisplayName("Deve buscar notebook por id")
     void deveBuscarNotebookPorId() {
-
         when(repository.findById(1L))
                 .thenReturn(Optional.of(notebook));
 
-
         Notebook resultado =
                 service.buscarPorId(1L);
-
 
         assertEquals(
                 "Notebook Gamer",
                 resultado.getNome()
         );
-
         verify(repository)
                 .findById(1L);
     }
@@ -125,7 +103,6 @@ class NotebookServiceTest {
     @Test
     @DisplayName("Deve lançar exceção quando notebook não existir")
     void deveLancarErroQuandoNotebookNaoExistir() {
-
         when(repository.findById(1L))
                 .thenReturn(Optional.empty());
 
@@ -134,7 +111,6 @@ class NotebookServiceTest {
                 () -> service.buscarPorId(1L)
         );
 
-
         verify(repository)
                 .findById(1L);
     }
@@ -142,7 +118,6 @@ class NotebookServiceTest {
     @Test
     @DisplayName("Deve cadastrar notebook")
     void deveCadastrarNotebook() {
-
         when(repository.save(notebook))
                 .thenReturn(notebook);
 
@@ -150,12 +125,10 @@ class NotebookServiceTest {
                 service.cadastrar(notebook);
 
         assertNotNull(resultado);
-
         assertEquals(
                 "Notebook Gamer",
                 resultado.getNome()
         );
-
 
         verify(repository)
                 .save(notebook);
@@ -165,49 +138,38 @@ class NotebookServiceTest {
     @Test
     @DisplayName("Deve atualizar notebook")
     void deveAtualizarNotebook() {
-
         Notebook atualizado = new Notebook();
-
         atualizado.setId(1L);
         atualizado.setNome("Notebook Pro");
         atualizado.setDescricao("Novo");
         atualizado.setPreco(7000.0);
         atualizado.setAcessorios(new ArrayList<>());
 
-
         when(repository.findById(1L))
                 .thenReturn(Optional.of(notebook));
-
 
         when(repository.save(any(Notebook.class)))
                 .thenReturn(atualizado);
 
-
         Notebook resultado =
                 service.atualizar(1L, atualizado);
-
 
         assertEquals(
                 "Notebook Pro",
                 resultado.getNome()
         );
 
-
         verify(repository)
                 .save(any(Notebook.class));
     }
 
-
     @Test
     @DisplayName("Deve excluir notebook")
     void deveExcluirNotebook() {
-
         when(repository.findById(1L))
                 .thenReturn(Optional.of(notebook));
 
-
         service.excluir(1L);
-
 
         verify(repository)
                 .delete(notebook);

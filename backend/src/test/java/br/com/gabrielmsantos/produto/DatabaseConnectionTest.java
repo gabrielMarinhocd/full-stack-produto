@@ -17,11 +17,9 @@ class DatabaseConnectionTest {
 
     @Test
     void deveConectarAoBanco() throws Exception {
-
         assertNotNull(dataSource);
 
         try (Connection connection = dataSource.getConnection()) {
-
             assertNotNull(connection);
             assertFalse(connection.isClosed());
 
