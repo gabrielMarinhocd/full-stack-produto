@@ -53,7 +53,6 @@ projeto/
     │   │   │       ├── models/
     │   │   │       ├── pages/
     │   │   │       │   ├── cadastro/
-    │   │   │       │   ├── detalhe/
     │   │   │       │   └── lista/
     │   │   │       └── notebook.service.ts
     │   │   ├── app.config.ts
